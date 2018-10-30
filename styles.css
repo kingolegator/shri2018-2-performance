@@ -1,4 +1,11 @@
-
+img {
+  width: auto\9;
+  height: auto;
+  max-width: 100%;
+  vertical-align: middle;
+  border: 0;
+  -ms-interpolation-mode: bicubic;
+}
 .adjust-bar {
   -webkit-appearance: none;
   appearance: none;
@@ -525,12 +532,6 @@ html {
   background: #f7f7f7;
   cursor: pointer;
   transition: opacity 0.3s ease-out;
-}
-img {
-  height: auto;
-  max-width: 100%;
-  vertical-align: middle;
-  border: 0;
 }
 .panel:hover {
   background: #fff;
