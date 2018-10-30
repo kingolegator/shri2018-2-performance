@@ -14,7 +14,7 @@ let currentPageDevs = 1;
 
 pagiantorDevs.classList.toggle('paginator_hide', panelCountDevs < 7);
 
-arrowRightDevs.addEventListener('click', function () {
+arrowRightDevs.addEventListener('click', () => {
     currentPageDevs += 1;
     arrowLeftDevs.classList.toggle('paginator__arrow_disabled', currentPageDevs === 1);
     devices.scroll({
@@ -24,7 +24,7 @@ arrowRightDevs.addEventListener('click', function () {
     });
 });
 
-arrowLeftDevs.addEventListener('click', function () {
+arrowLeftDevs.addEventListener('click', () => {
   if (currentPageDevs > 1) {
     currentPageDevs -= 1;
     arrowLeftDevs.classList.toggle('paginator__arrow_disabled', currentPageDevs === 1);
@@ -45,7 +45,7 @@ const MIN_VALUE = 26;
 const MAX_VALUE = 35;
 const INDICATOR_OFFSET = 265;
 
-const rotateToValue = function(rotate) {
+const rotateToValue = (rotate) => {
   return Math.floor((Math.abs(rotate * 360 * 1.73 + INDICATOR_OFFSET) / 53) + MIN_VALUE);
 }
 
@@ -53,7 +53,7 @@ const rotateToValue = function(rotate) {
 /**
  * @param {Number} rotate Количество оборотов от нейтриального положения.
  */
-function setRotate(rotate) {
+const setRotate = (rotate) => {
   if (rotate > maxRotate) {
     rotate = maxRotate;
   } else if (rotate < minRotate) {
@@ -63,13 +63,13 @@ function setRotate(rotate) {
   curRotate = rotate;
   curValue = rotateToValue(rotate);
 
-  document.querySelector('.modal_knob .modal__value').innerHTML = '+' + curValue;
-  document.querySelector('.knob__value').innerHTML = '+' + curValue;
-  document.querySelector('.knob__indicator').style.strokeDasharray = curRotate * 360 * 1.73 + INDICATOR_OFFSET + ' 629';
-  document.querySelector('.knob__arrow').style.transform = 'rotate(' + (curRotate * 360) + 'deg)';
+  document.querySelector('.modal_knob .modal__value').innerHTML = `+ ${curValue}`;
+  document.querySelector('.knob__value').innerHTML = `+ ${curValue}`;
+  document.querySelector('.knob__indicator').style.strokeDasharray = `${curRotate * 360 * 1.73 + INDICATOR_OFFSET} 629`;
+  document.querySelector('.knob__arrow').style.transform = `rotate(${(curRotate * 360)}deg)`;
 }
 
-function getPosition(elem) {
+const getPosition = (elem) => {
   const rect = elem.getBoundingClientRect();
 
   return [
@@ -78,7 +78,7 @@ function getPosition(elem) {
   ];
 }
 
-function getMouseAngle(event, centerElem) {
+const getMouseAngle = (event, centerElem) => {
   const pos = getPosition(centerElem);
   let cursor = [event.clientX, event.clientY];
   let rad;
@@ -97,7 +97,7 @@ let knobDragged;
 let prevAngleRad = null;
 let prevRotate = null;
 
-function startDragging(e) {
+const startDragging = (e) => {
   e.preventDefault();
   e.stopPropagation();
   const rad = getMouseAngle(e, document.querySelector('.knob_center'));
@@ -107,11 +107,11 @@ function startDragging(e) {
   prevRotate = curRotate;
 }
 
-function stopDragging(e) {
+const stopDragging = (e) => {
   knobDragged = false;
 }
 
-function dragRotate(e) {
+const dragRotate = (e) => {
   if (!knobDragged) {
     return;
   }
@@ -136,7 +136,7 @@ function dragRotate(e) {
   setRotate(rotate);
 }
 
-function setEvtListeners() {
+const setEvtListeners = () => {
   const elem = document.querySelector('.knob-container');
 
   elem.addEventListener('mousedown', startDragging);
@@ -151,7 +151,7 @@ setEvtListeners();
 setRotate(0);
 
 document.querySelectorAll('.modal_close').forEach(b => {
-  b.onclick = function() {
+  b.onclick = () => {
     document.querySelectorAll('.modal').forEach(m => {
       m.classList.toggle('modal_open', false);
       document.querySelector('body').style.overflow = 'auto';
@@ -169,29 +169,29 @@ const TEMPS = {
 document.querySelectorAll('.modal__filter-item_temp').forEach(l => {
   l.onclick = function() {
     document.querySelector('.adjust-bar_theme_temp').value = TEMPS[this.id];
-    document.querySelector('.modal_temp .modal__value').innerHTML = TEMPS[this.id] > 0 ? '+' + TEMPS[this.id] : TEMPS[this.id];
+    document.querySelector('.modal_temp .modal__value').innerHTML = TEMPS[this.id] > 0 ? `+${TEMPS[this.id]}` : TEMPS[this.id];
   }
 });
 
-const showModal = function(selector) {
+const showModal = (selector) => {
   document.querySelector(selector).classList.toggle('modal_open', true);
   document.querySelector('body').style.overflow = 'hidden';
 }
 
 document.querySelectorAll('.panel_temp').forEach(p => {
-  p.onclick = function() {
+  p.onclick = () => {
     showModal('.modal_temp');
   }
 });
 
 document.querySelectorAll('.panel_lamp').forEach(p => {
-  p.onclick = function() {
+  p.onclick = () => {
     showModal('.modal_light');
   }
 });
 
 document.querySelectorAll('.panel_floor').forEach(p => {
-  p.onclick = function() {
+  p.onclick = () => {
     showModal('.modal_knob');
   }
 });
@@ -206,7 +206,7 @@ let currentPage = 1;
 
 pagiantorScens.classList.toggle('paginator_hide', panelCountScens <= 9);
 
-arrowRightScens.addEventListener('click', function () {
+arrowRightScens.addEventListener('click', () => {
   if (currentPage < pageCountScens) {
     currentPage += 1;
     arrowRightScens.classList.toggle('paginator__arrow_disabled', currentPage === pageCountScens);
@@ -219,7 +219,7 @@ arrowRightScens.addEventListener('click', function () {
   }
 });
 
-arrowLeftScens.addEventListener('click', function () {
+arrowLeftScens.addEventListener('click', () => {
   if (currentPage > 1) {
     currentPage -= 1;
     arrowRightScens.classList.toggle('paginator__arrow_disabled', currentPage === pageCountScens);
