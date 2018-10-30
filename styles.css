@@ -524,6 +524,12 @@ html {
   cursor: pointer;
   transition: opacity 0.3s ease-out;
 }
+img {
+  height: auto;
+  max-width: 100%;
+  vertical-align: middle;
+  border: 0;
+}
 .panel:hover {
   background: #fff;
   box-shadow: 0 2px 6px 0 rgba(197, 186, 186, 0.5);
