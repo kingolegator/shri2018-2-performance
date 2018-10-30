@@ -7,12 +7,11 @@
     <title>Smarthome</title>
 
     <link rel="shortcut icon" href="favicon.ico">
-    <link href="fonts/pt_sans.css" rel="preload" as="style">
-    <link rel="preload" href="assets/banner.webp" as="image">
+
     <link rel="stylesheet" href="styles.css">
 </head>
-
 <body class="page">
+<div id="root"></div>
 
 <div class="page__wrapper">
     <div class="page__wrapper-content">
@@ -86,7 +85,7 @@
                                 </div>
                             </div>
                             <div class="panel main__panel panel_device panel_out_bot">
-                                <a target=_blank href="http://ya.ru"><img src="assets/banner.webp"></a>
+                                <script type="text/javascript" src="banner.js"></script>
                             </div>
                         </div>
                     </div>
@@ -191,12 +190,30 @@
 
                     <div class="scenarios__page">
                         <div class="panel scenarios__panel">
-                            <div class="panel__icon panel__icon_clock"></div>
+                            <div class="panel__icon panel__icon_light_on"></div>
                             <div class="panel__text">
-                                <div class="panel__title">Я ухожу</div>
+                                <div class="panel__title">Включить свет в корридоре</div>
                             </div>
                         </div>
                     </div>
+
+                    <script type="text/babel">
+                        class App extends React.Component {
+                            render() {
+                                return (
+                                    <div class="panel scenarios__panel">
+                                        <div class="panel__icon panel__icon_clock"></div>
+                                        <div class="panel__text">
+                                            <div class="panel__title">Я ухожу</div>
+                                        </div>
+                                    </div>
+                                );
+                            }
+                        }
+
+                        ReactDOM.render(<App />, document.getElementsByClassName('scenarios__page')[1]);
+                    </script>
+
                 </section>
             </div>
 
@@ -204,6 +221,24 @@
         <span class="content__item-header content__item-header_devices">
           Избранные устройства
         </span>
+
+                <div class="filter__select">
+                    <button class="filter__select-button" type="button">
+                        <span class="button__text">Все</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="6">
+                            <path d="M10.3 0L5.5 4.7.7 0 0 .7 5.5 6 11 .7z"/>
+                        </svg>
+                    </button>
+                    <div class="filter__select-popup" aria-hidden="true">
+                        <div class="filter__select-menu">
+                            <div class="filter__select-item filter__select-item_checked" data-group="all">Все</div>
+                            <div class="filter__select-item" data-group="kitchen">Кухня</div>
+                            <div class="filter__select-item" data-group="room">Зал</div>
+                            <div class="filter__select-item" data-group="lamp">Лампочки</div>
+                            <div class="filter__select-item" data-group="cam">Камеры</div>
+                        </div>
+                    </div>
+                </div>
 
                 <input class="filter__item-radio filter__item_devices filter__item-radio_all" type="radio" name="filter" id="all" checked>
                 <label class="filter__item-label filter__item_devices" for="all">Все</label>
@@ -311,102 +346,112 @@
         <a href="#" class="link footer__link">Условия использования</a>
     </footer>
 </div>
-<div class="modals-wrapper">
-    <div class="modal modal_temp">
-        <div class="modal__content">
 
-            <div class="modal__body">
-                <div class="modal__title">Elgato Eve Degree Connected</div>
-                <div class="modal__value modal__value_temp">+23</div>
-                <div class="modal__status">Включено</div>
-                <div class="modal__filter">
-                    <div class="filter__item-label modal__filter-item_temp" id="manual">Вручную</div>
-                    <div class="filter__item-label modal__filter-item_temp" id="cold">Холодно</div>
-                    <div class="filter__item-label modal__filter-item_temp" id="warm">Тепло</div>
-                    <div class="filter__item-label modal__filter-item_temp" id="hot">Жарко</div>
-                </div>
-                <div class="adjust-bar__container adjust-bar__container_theme_temp modal__adjust">
-                    <input class="adjust-bar adjust-bar_theme_temp" type="range" name="lightRange" id="lightRange" value="23" min="-10" max="30" orient="vertical">
-                </div>
+<div class="modal modal_temp">
+    <div class="modal__content">
+
+        <div class="modal__body">
+            <div class="modal__title">Elgato Eve Degree Connected</div>
+            <div class="modal__value modal__value_temp">+23</div>
+            <div class="modal__status">Включено</div>
+            <div class="modal__filter">
+                <div class="filter__item-label modal__filter-item_temp" id="manual">Вручную</div>
+                <div class="filter__item-label modal__filter-item_temp" id="cold">Холодно</div>
+                <div class="filter__item-label modal__filter-item_temp" id="warm">Тепло</div>
+                <div class="filter__item-label modal__filter-item_temp" id="hot">Жарко</div>
             </div>
-
-            <div class="modal__controls">
-                <div class="button button_size_l button_color_yellow modal__button">Применить</div>
-                <div class="button button_size_l modal__button modal_close">Закрыть</div>
+            <div class="adjust-bar__container adjust-bar__container_theme_temp modal__adjust">
+                <input class="adjust-bar adjust-bar_theme_temp" type="range" name="lightRange" id="lightRange" value="23" min="-10" max="30" orient="vertical">
             </div>
         </div>
 
-    </div>
-    <div class="modal modal_light">
-        <div class="modal__content">
-
-            <div class="modal__body">
-                <div class="modal__title">Xiaomi Yeelight LED Smart Bulb</div>
-                <div class="modal__value modal__value_light"></div>
-                <div class="modal__status">Включено</div>
-                <div class="modal__filter">
-                    <div class="filter__item-label modal__filter-item" id="manual">Вручную</div>
-                    <div class="filter__item-label modal__filter-item" id="day">Дневной свет</div>
-                    <div class="filter__item-label modal__filter-item" id="evening">Вечерний свет</div>
-                    <div class="filter__item-label modal__filter-item" id="dawn">Рассвет</div>
-                </div>
-                <div class="adjust-bar__container adjust-bar__container_theme_light modal__adjust">
-                    <input class="adjust-bar adjust-bar_theme_light" type="range" name="tempRange" id="lightRange" value="25" min="0" max="50" orient="vertical">
-                </div>
-            </div>
-
-            <div class="modal__controls">
-                <div class="button button_size_l button_color_yellow modal__button">Применить</div>
-                <div class="button button_size_l modal__button modal_close">Закрыть</div>
-            </div>
+        <div class="modal__controls">
+            <div class="button button_size_l button_color_yellow modal__button">Применить</div>
+            <div class="button button_size_l modal__button modal_close">Закрыть</div>
         </div>
     </div>
-    <div class="modal modal_knob">
-        <div class="modal__content">
 
-            <div class="modal__body">
-                <div class="modal__title">Xiaomi Warm Floor</div>
-                <div class="modal__value modal__value_temp">+23</div>
-                <div class="modal__status">Включено</div>
-                <div class="knob__wrapper">
-                    <div class="knob">
-                        <svg viewBox="-110 -110 220 220" id="foobar">
-                            <filter id="knob-shadow">
-                                <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
-                                <feOffset dx="2" dy="0" result="offsetblur"/>
-                                <feFlood flood-color="rgba(134,121,71,0.45)"/>
-                                <feComposite in2="offsetblur" operator="in"/>
-                                <feMerge>
-                                    <feMergeNode/>
-                                    <feMergeNode in="SourceGraphic"/>
-                                </feMerge>
-                            </filter>
-                            <g class="knob-container">
-                                <circle class="knob_center" cx="0" cy="0"/>
-                                <circle class="knob__indicator-bg" r="110" cx="0" cy="0" />
-                                <circle class="knob__indicator" r="100" cx="0" cy="0"/>
-                                <circle class="knob__indicator-mask" r="100" cx="0" cy="0"/>
-                                <circle class="knob__indicator-bounds" r="100" cx="0" cy="0"/>
-                                <circle class="knob__self" r="89" cx="0" cy="0" />
-                                <polygon class="knob__arrow" points="-90,0 -85,5 -85,-5" />
-                            </g>
-                        </svg>
-                        <div class="knob__value">+23</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="modal__controls">
-                <div class="button button_size_l button_color_yellow modal__button">Применить</div>
-                <div class="button button_size_l modal__button modal_close">Закрыть</div>
-            </div>
-        </div>
-
-    </div>
 </div>
 
+<div class="modal modal_light">
+    <div class="modal__content">
+
+        <div class="modal__body">
+            <div class="modal__title">Xiaomi Yeelight LED Smart Bulb</div>
+            <div class="modal__value modal__value_light"></div>
+            <div class="modal__status">Включено</div>
+            <div class="modal__filter">
+                <div class="filter__item-label modal__filter-item" id="manual">Вручную</div>
+                <div class="filter__item-label modal__filter-item" id="day">Дневной свет</div>
+                <div class="filter__item-label modal__filter-item" id="evening">Вечерний свет</div>
+                <div class="filter__item-label modal__filter-item" id="dawn">Рассвет</div>
+            </div>
+            <div class="adjust-bar__container adjust-bar__container_theme_light modal__adjust">
+                <input class="adjust-bar adjust-bar_theme_light" type="range" name="tempRange" id="lightRange" value="25" min="0" max="50" orient="vertical">
+            </div>
+        </div>
+
+        <div class="modal__controls">
+            <div class="button button_size_l button_color_yellow modal__button">Применить</div>
+            <div class="button button_size_l modal__button modal_close">Закрыть</div>
+        </div>
+    </div>
+</div>
+<div class="stats">
+</div>
+
+<div class="modal modal_knob">
+    <div class="modal__content">
+
+        <div class="modal__body">
+            <div class="modal__title">Xiaomi Warm Floor</div>
+            <div class="modal__value modal__value_temp">+23</div>
+            <div class="modal__status">Включено</div>
+            <div class="knob__wrapper">
+                <div class="knob">
+                    <svg viewBox="-110 -110 220 220" id="foobar">
+                        <filter id="knob-shadow">
+                            <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
+                            <feOffset dx="2" dy="0" result="offsetblur"/>
+                            <feFlood flood-color="rgba(134,121,71,0.45)"/>
+                            <feComposite in2="offsetblur" operator="in"/>
+                            <feMerge>
+                                <feMergeNode/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                        <g class="knob-container">
+                            <circle class="knob_center" cx="0" cy="0"/>
+                            <circle class="knob__indicator-bg" r="110" cx="0" cy="0" />
+                            <circle class="knob__indicator" r="100" cx="0" cy="0"/>
+                            <circle class="knob__indicator-mask" r="100" cx="0" cy="0"/>
+                            <circle class="knob__indicator-bounds" r="100" cx="0" cy="0"/>
+                            <circle class="knob__self" r="89" cx="0" cy="0" />
+                            <!-- <polygon class="knob__arrow" points="5,-90 0,-85 10,-85" /> -->
+                            <polygon class="knob__arrow" points="-90,0 -85,5 -85,-5" />
+                        </g>
+                    </svg>
+                    <div class="knob__value">+23</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal__controls">
+            <div class="button button_size_l button_color_yellow modal__button">Применить</div>
+            <div class="button button_size_l modal__button modal_close">Закрыть</div>
+        </div>
+    </div>
+
+</div>
+
+
 <script src="scripts.js"></script>
-<link href="fonts/pt_sans.css" rel="stylesheet" media="screen">
+<link href="bootstrap.css" rel="stylesheet" media="screen">
+<style type="text/css">
+    .main__greeting {
+        font-family: "PT Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+</style>
 
 </body>
 
